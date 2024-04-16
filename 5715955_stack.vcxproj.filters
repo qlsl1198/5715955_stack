@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="5715955_stack.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="4_11.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
