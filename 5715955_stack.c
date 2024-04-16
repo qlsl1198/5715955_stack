@@ -1,96 +1,111 @@
-﻿#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-
-#define MAX_STACK_SIZE 10
-
-typedef int element;
-element stack[MAX_STACK_SIZE];
-int top = -1;
-
-int is_full() {
-    return (top == MAX_STACK_SIZE - 1);
-}
-
-int is_empty() {
-    return (top == -1);
-}
-
-void push(element item) {
-    if (is_full()) {
-        fprintf(stderr, "Stack is full\n");
-        return;
-    }
-    else {
-        top = top + 1;
-        stack[top] = item;
-    }
-}
-
-element pop() {
-    element r;
-    if (is_empty()) {
-        fprintf(stderr, "Stack is empty\n");
-        return -1; // 스택이 비어있는 경우에도 -1을 반환하도록 수정
-    }
-    else {
-        r = stack[top];
-        top = top - 1;
-        return r;
-    }
-}
-
-element peek() {
-    if (is_empty()) {
-        fprintf(stderr, "Stack is empty\n");
-        return -1; // 스택이 비어있는 경우에도 -1을 반환하도록 수정
-    }
-    else {
-        return stack[top];
-    }
-}
-
-int main() {
-    element e;
-
-    srand(time(NULL));
-
-    for (int i = 0; i < 30; ++i) {
-        e = (rand() % 100) + 1;
-
-        if (e % 2 == 0) {
-            printf("current rand_num : %d | Even\n", e);
-            if (!is_full()) {
-                push(e);
-                printf("Push : %d\n", e);
-            }
-            else {
-                printf("Stack Overflow\n");
-            }
-        }
-        else {
-            printf("current rand_num : %d | Odd\n", e);
-            if (!is_empty()) {
-                e = pop();
-                printf("Pop : %d\n", e);
-            }
-            else {
-                printf("Stack Underflow\n");
-            }
-        }
-
-        // 스택의 상태 출력
-        printf("Stack elements: ");
-        if (is_empty()) {
-            printf("Stack is empty");
-        }
-        else {
-            for (int j = 0; j <= top; ++j) {
-                printf("%d ", stack[j]);
-            }
-        }
-        printf("\n\n");
-    }
-
-    return 0;
-}
+﻿//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//
+//#define MAX_STACK_SIZE 100
+//
+//typedef int element;
+//typedef struct Stacktype {
+//    element* data;
+//    int top;
+//    int capacity;
+//} StackType;
+//
+//void init(StackType* sptr, int ofs) {
+//    sptr->data = (element*)malloc(sizeof(element) * ofs);
+//    sptr->top = -1;
+//    sptr->capacity = ofs;
+//}
+//
+//int is_full(StackType* sptr) {
+//    return (sptr->top == sptr->capacity - 1);
+//}
+//
+//int is_empty(StackType* sptr) {
+//    return (sptr->top == -1);
+//}
+//
+//void push(StackType* sptr, element item) {
+//    if (is_full(sptr)) {
+//        fprintf(stderr, "Stack is full\n");
+//        return;
+//    }
+//    else {
+//        sptr->top++;
+//        sptr->data[sptr->top] = item;
+//    }
+//}
+//
+//element pop(StackType* sptr) {
+//    if (is_empty(sptr)) {
+//        fprintf(stderr, "Stack is empty\n");
+//        return -1;
+//    }
+//    else {
+//        return sptr->data[(sptr->top)--];
+//    }
+//}
+//
+//void stack_print(StackType* sptr) {
+//    for (int i = 0; i <= sptr->top; i++) {
+//        printf("[%d] ", sptr->data[i]);
+//    }
+//    printf("\n");
+//}
+//
+//int eval(char expr[]) {
+//    int len;
+//    StackType s;
+//
+//    len = strlen(expr);
+//    init(&s, len);
+//
+//    for (int i = 0; i < len; i++) {
+//        int ch = expr[i];
+//        int value;
+//        int op1, op2;
+//
+//        if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+//            op1 = pop(&s);
+//            op2 = pop(&s);
+//            switch (ch) {
+//            case '+':
+//                push(&s, op2 + op1);
+//                break;
+//            case '-':
+//                push(&s, op2 - op1);
+//                break;
+//            case '*':
+//                push(&s, op2 * op1);
+//                break;
+//            case '/':
+//                push(&s, op2 / op1);
+//                break;
+//            default:
+//                break;
+//            }
+//        }
+//        else if (ch >= '0' && ch <= '9') {
+//            value = ch - '0';
+//            push(&s, value);
+//        }
+//        else {
+//            //printf(" Abnormal character in expression\n");
+//        }
+//    }
+//    return (pop(&s));
+//}
+//
+//int main() {
+//    char expression[MAX_STACK_SIZE];
+//
+//    printf("postfix expression: ");
+//    fgets(expression, sizeof(expression), stdin);
+//    expression[strcspn(expression, "\n")] = '\0'; // remove newline character
+//
+//    int result = eval(expression);
+//
+//    printf("Result: %d\n", result);
+//
+//    return 0;
+//}
